@@ -69,7 +69,7 @@ def main():
     # Change the fontsize of the graphs to make it easier to read.
     # Also change the picture size, useful for the save-to-file option.
 
-    data=loadtxt(filename, usecols=(0,1,2,3), skiprows=1, unpack=True)
+    data=loadtxt(filename, usecols=(1,0,3,2), skiprows=1, unpack=True)
     # Load file, take columns 0 & 1 & 2 & 3, skip 1 row, unpack means
     # the data points are line by line instead of line 2 being all x values
     # and line 3 being all the y values, etc.
@@ -129,9 +129,9 @@ def main():
     # Prints a box using what's in the "label" strings in the previous two lines.
     # loc specifies the location
 
-    ax1.set_xlabel("xdata")
-    ax1.set_ylabel("ydata")
-    ax1.set_title("Best fit of some data points")
+    ax1.set_xlabel("Initial Angle(Θ)(rad) of Pendulum")
+    ax1.set_ylabel("Period(T)(s) of Pendulum")
+    ax1.set_title("Relationship between Initial Angle(Θ) and Period(T) of a Pendulum of Length 40.37cm")
     # Here is where you change how your graph is labelled.
 
     #ax1.set_xscale('log')
@@ -156,8 +156,8 @@ def main():
     ax2.axhline(y=0, color="black")    
     # Plot the y=0 line for context.
     
-    ax2.set_xlabel("xdata")
-    ax2.set_ylabel("ydata")
+    ax2.set_xlabel("Initial Angle(Θ)(rad) of Pendulum")
+    ax2.set_ylabel("Period(T)(s) of Pendulum")
     ax2.set_title("Residuals of the fit")
     # Here is where you change how your graph is labelled.
 
