@@ -8,6 +8,7 @@ def add(to_add):
     last_value = current_value
     current_value = current_value + to_add
     
+    
 def mult(to_mult):
     global current_value
     global last_value
