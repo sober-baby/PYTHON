@@ -64,7 +64,7 @@ def main():
     my_func = quadratic
     # Change to whichever of the 5 functions you want to fit
 
-    plt.rcParams.update({'font.size': 14})
+    plt.rcParams.update({'font.size': 10})
     plt.rcParams['figure.figsize'] = 10, 9
     # Change the fontsize of the graphs to make it easier to read.
     # Also change the picture size, useful for the save-to-file option.
