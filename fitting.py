@@ -138,7 +138,7 @@ def main():
     #ax1.set_yscale('log')
     # uncomment out the above two lines if you want to make it log-log scale
 
-########### HERE!!! ##############    
+########### HERE!!! ##############    e
     
     print("A:", a, "+/-", u_a)
     print("tau:", tau, "+/-", u_tau)
