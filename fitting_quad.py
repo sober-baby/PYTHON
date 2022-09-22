@@ -64,12 +64,12 @@ def main():
     my_func = quadratic
     # Change to whichever of the 5 functions you want to fit
 
-    plt.rcParams.update({'font.size': 10})
+    plt.rcParams.update({'font.size': 14})
     plt.rcParams['figure.figsize'] = 10, 9
     # Change the fontsize of the graphs to make it easier to read.
     # Also change the picture size, useful for the save-to-file option.
 
-    data=loadtxt(filename, usecols=(1,0,2,3), skiprows=1, unpack=True)
+    data=loadtxt(filename, usecols=(0,1,2,3), skiprows=1, unpack=True)
     # Load file, take columns 0 & 1 & 2 & 3, skip 1 row, unpack means
     # the data points are line by line instead of line 2 being all x values
     # and line 3 being all the y values, etc.
@@ -81,8 +81,10 @@ def main():
     # Finished importing data, naming it sensibly.
 
 ########### HERE!!! ##############
-               
-    init_guess = (0.55, 100.0, 1.667)
+      
+    init_guess = (0, 0, 1)
+    # Your initial guess of (a, b, c)         
+    # init_guess = (0.55, 100.0, 1.667, 0.0)
     # Your initial guess of (a, tau, T, phi)
     # For sinusoidal functions, guessing T correctly is critically important
     # Note: your initial guess must have the same number of parameters as
@@ -92,16 +94,22 @@ def main():
     # The best fit values are popt[], while pcov[] tells us the uncertainties.
 
 ########### HERE!!! ##############
-    
+
     a=popt[0]
-    tau=popt[1]
-    T=popt[2]
-    # phi=popt[3]
-    # best fit values are named nicely
+    b=popt[1]
+    c=popt[2]
     u_a=pcov[0,0]**(0.5)
-    u_tau=pcov[1,1]**(0.5)
-    u_T=pcov[2,2]**(0.5)
-    # u_phi=pcov[3,3]**(0.5)
+    u_b=pcov[1,1]**(0.5)
+    u_c=pcov[2,2]**(0.5)
+    #a=popt[0]
+    #tau=popt[1]
+    #T=popt[2]
+    #phi=popt[3]
+    # best fit values are named nicely
+    #u_a=pcov[0,0]**(0.5)
+    #u_tau=pcov[1,1]**(0.5)
+    #u_T=pcov[2,2]**(0.5)
+    #u_phi=pcov[3,3]**(0.5)
     # uncertainties of fit are named nicely
         
     start = min(xdata)
@@ -129,21 +137,24 @@ def main():
     # Prints a box using what's in the "label" strings in the previous two lines.
     # loc specifies the location
 
-    ax1.set_xlabel("Initial Angle(rad) of Pendulum")
-    ax1.set_ylabel("Period(s) of Pendulum")
-    ax1.set_title("Relationship between Initial Angle(Θ) and Period(T) of a Pendulum of Length 40.37cm")
+    ax1.set_xlabel("xdata")
+    ax1.set_ylabel("ydata")
+    ax1.set_title("Best fit of some data points")
     # Here is where you change how your graph is labelled.
 
     #ax1.set_xscale('log')
     #ax1.set_yscale('log')
     # uncomment out the above two lines if you want to make it log-log scale
 
-########### HERE!!! ##############    e
+########### HERE!!! ##############    
     
-    print("A:", a, "+/-", u_a)
-    print("tau:", tau, "+/-", u_tau)
-    print("T:", T, "+/-", u_T)
-    # print("phi:", phi, "+/-", u_phi)
+    print("a:", a, "+/-", u_a)
+    print("b:", b, "+/-", u_b)
+    print("c:", c, "+/-", u_c)
+    #print("A:", a, "+/-", u_a)
+    #print("tau:", tau, "+/-", u_tau)
+    #print("T:", T, "+/-", u_T)
+    #print("phi:", phi, "+/-", u_phi)
     # prints the various values with uncertainties
     # This is printed to your screen, not on the graph.
     # If you want to print it on the graph, use plt.text(), details at
@@ -156,8 +167,8 @@ def main():
     ax2.axhline(y=0, color="black")    
     # Plot the y=0 line for context.
     
-    ax2.set_xlabel("Initial Angle(rad) of Pendulum")
-    ax2.set_ylabel("Period(s) of Pendulum")
+    ax2.set_xlabel("xdata")
+    ax2.set_ylabel("ydata")
     ax2.set_title("Residuals of the fit")
     # Here is where you change how your graph is labelled.
 
