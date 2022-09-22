@@ -22,7 +22,7 @@ function).
 If you want to change the file name, that's the next line below this comment.
 """
 
-filename="mydata.txt"
+filename="mydata_exp.txt"
 """
 Change this if your filename is different.
 
@@ -41,6 +41,7 @@ def damped_sinusoid(t, a, tau, T, phi):
     return a*np.exp(-t/tau)*np.cos(2*np.pi*t/T+phi)
 
 def exponential(t, a, tau):
+    print("dsklhjfadlsjkgh: ", tau)
     return a*np.exp(-t/tau)
 
 def linear(t, m, b):
@@ -65,11 +66,11 @@ def main():
     # Change to whichever of the 5 functions you want to fit
 
     plt.rcParams.update({'font.size': 10})
-    plt.rcParams['figure.figsize'] = 10, 9
+    # plt.rcParams['figure.figsize'] = 10, 9
     # Change the fontsize of the graphs to make it easier to read.
     # Also change the picture size, useful for the save-to-file option.
 
-    data=loadtxt(filename, usecols=(1,0,3,2), skiprows=1, unpack=True)
+    data=loadtxt(filename, usecols=(0,1,2,3), skiprows=1, unpack=True)
     # Load file, take columns 0 & 1 & 2 & 3, skip 1 row, unpack means
     # the data points are line by line instead of line 2 being all x values
     # and line 3 being all the y values, etc.
