@@ -130,9 +130,9 @@ def main():
     # Prints a box using what's in the "label" strings in the previous two lines.
     # loc specifies the location
 
-    ax1.set_xlabel("Initial Angle(Θ)(rad) of Pendulum")
-    ax1.set_ylabel("Period(T)(s) of Pendulum")
-    ax1.set_title("Relationship between Initial Angle(Θ) and Period(T) of a Pendulum of Length 40.37cm")
+    ax1.set_xlabel("Time(s)")
+    ax1.set_ylabel("Maximum Angle(rad) of Pendulum")
+    ax1.set_title("Relationship between Time(s) and Maximum Angle(rad) of a Pendulum of Length 40.37cm")
     # Here is where you change how your graph is labelled.
 
     #ax1.set_xscale('log')
@@ -157,8 +157,8 @@ def main():
     ax2.axhline(y=0, color="black")
     # Plot the y=0 line for context.
 
-    ax2.set_xlabel("Initial Angle(Θ)(rad) of Pendulum")
-    ax2.set_ylabel("Period(T)(s) of Pendulum")
+    ax2.set_xlabel("Time(s)")
+    ax2.set_ylabel("Maximum Angle(rad) of Pendulum")
     ax2.set_title("Residuals of the fit")
     # Here is where you change how your graph is labelled.
 
