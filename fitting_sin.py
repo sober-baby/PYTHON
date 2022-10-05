@@ -63,7 +63,7 @@ highlighted by comments that look like:
 """
 
 def main():
-    my_func = exponential
+    my_func = damped_sinusoid
     # Change to whichever of the 5 functions you want to fit
 
     plt.rcParams.update({'font.size': 10})
@@ -84,7 +84,7 @@ def main():
 
 ########### HERE!!! ##############
 
-    init_guess = (0.55, 100.0)
+    init_guess = (0.52, 34, 1.2469, 0)
     # Your initial guess of (a, tau, T, phi)
     # For sinusoidal functions, guessing T correctly is critically important
     # Note: your initial guess must have the same number of parameters as
@@ -97,20 +97,20 @@ def main():
 
     a=popt[0]
     tau=popt[1]
-    # T=popt[2]
-    # phi=popt[3]
+    T=popt[2]
+    phi=popt[3]
     # best fit values are named nicelye
     u_a=pcov[0,0]**(0.5)
     u_tau=pcov[1,1]**(0.5)
-    # u_T=pcov[2,2]**(0.5)
-    # u_phi=pcov[3,3]**(0.5)
+    u_T=pcov[2,2]**(0.5)
+    u_phi=pcov[3,3]**(0.5)
     # uncertainties of fit are named nicely
 
     start = min(xdata)
     stop = max(xdata)
     xs = np.arange(start,stop,(stop-start)/1000)
     curve = my_func(xs, *popt)
-    # (x,y) = (xs,curve) is the line of best fit for the data in (xdata,ydata).
+    #(x,y) = (xs,curve) is the line of best fit for the data in (xdata,ydata).
     # It has 1000 points to make it look smooth.
     # Note: the "*" tells Python to send all the popt values in a readable way.
 
