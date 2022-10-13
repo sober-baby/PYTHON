@@ -41,14 +41,16 @@ def damped_sinusoid(t, a, tau, T, phi):
     return a*np.exp(-t/tau)*np.cos(2*np.pi*t/T+phi)
 
 def exponential(t, a, tau):
-    print("dsklhjfadlsjkgh: ", tau)
+    #print("dsklhjfadlsjkgh: ", tau)
     return a*np.exp(-t/tau)
 
 def linear(t, m, b):
     return m*t+b
 
 def quadratic(t, a, b, c):
+    print("bro", c)
     return a*t**2 + b*t + c
+
 
 def powerlaw(t, a, b):
     return a*t**b
@@ -83,7 +85,7 @@ def main():
 
 ########### HERE!!! ##############
 
-    init_guess = (0.55, 100.0)
+    init_guess = (0.55, 35)
     # Your initial guess of (a, tau, T, phi)
     # For sinusoidal functions, guessing T correctly is critically important
     # Note: your initial guess must have the same number of parameters as

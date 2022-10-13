@@ -47,6 +47,7 @@ def linear(t, m, b):
     return m*t+b
 
 def quadratic(t, a, b, c):
+    print("bro", c)
     return a*t**2 + b*t + c
 
 def powerlaw(t, a, b):
