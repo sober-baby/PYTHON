@@ -66,8 +66,8 @@ def main():
     my_func = powerlaw
     # Change to whichever of the 5 functions you want to fit
 
-    plt.rcParams.update({'font.size': 20})
-    plt.rcParams['figure.figsize'] = 10, 9
+    plt.rcParams.update({'font.size': 14})
+    #plt.rcParams['figure.figsize'] = 10, 9
     # Change the fontsize of the graphs to make it easier to read.
     # Also change the picture size, useful for the save-to-file option.
 
@@ -84,7 +84,7 @@ def main():
 
 ########### HERE!!! ##############
                
-    init_guess = (2, 0.5)
+    init_guess = (0.30102999566, -0.30102999566)
     # Your initial guess of (a, tau, T, phi)
     # For sinusoidal functions, guessing T correctly is critically important
     # Note: your initial guess must have the same number of parameters as

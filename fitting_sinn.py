@@ -22,7 +22,7 @@ function).
 If you want to change the file name, that's the next line below this comment.
 """
 
-filename="mydata_exp.txt"
+filename="mydata_expsin.txt"
 """
 Change this if your filename is different.
 
@@ -41,16 +41,13 @@ def damped_sinusoid(t, a, tau, T, phi):
     return a*np.exp(-t/tau)*np.cos(2*np.pi*t/T+phi)
 
 def exponential(t, a, tau):
-    #print("dsklhjfadlsjkgh: ", tau)
     return a*np.exp(-t/tau)
 
 def linear(t, m, b):
     return m*t+b
 
 def quadratic(t, a, b, c):
-    print("bro", c)
     return a*t**2 + b*t + c
-
 
 def powerlaw(t, a, b):
     return a*t**b
@@ -64,10 +61,10 @@ highlighted by comments that look like:
 """
 
 def main():
-    my_func = exponential
+    my_func = damped_sinusoid
     # Change to whichever of the 5 functions you want to fit
 
-    plt.rcParams.update({'font.size': 14})
+    plt.rcParams.update({'font.size': 16})
     # plt.rcParams['figure.figsize'] = 10, 9
     # Change the fontsize of the graphs to make it easier to read.
     # Also change the picture size, useful for the save-to-file option.
@@ -85,7 +82,7 @@ def main():
 
 ########### HERE!!! ##############
 
-    init_guess = (0.55, 35)
+    init_guess = (0.55, 13, 1.2949, 1.355)
     # Your initial guess of (a, tau, T, phi)
     # For sinusoidal functions, guessing T correctly is critically important
     # Note: your initial guess must have the same number of parameters as
@@ -98,13 +95,13 @@ def main():
 
     a=popt[0]
     tau=popt[1]
-    # T=popt[2]
-    # phi=popt[3]
+    T=popt[2]
+    phi=popt[3]
     # best fit values are named nicelye
     u_a=pcov[0,0]**(0.5)
     u_tau=pcov[1,1]**(0.5)
-    # u_T=pcov[2,2]**(0.5)
-    # u_phi=pcov[3,3]**(0.5)
+    u_T=pcov[2,2]**(0.5)
+    u_phi=pcov[3,3]**(0.5)
     # uncertainties of fit are named nicely
 
     start = min(xdata)
@@ -120,7 +117,7 @@ def main():
     # The gridspec_kw argument makes the top plot 2 times taller than the bottom plot.
     # You can adjust the relative heights by, say, changing [2, 1] to [3, 1].
 
-    ax1.errorbar(xdata, ydata, yerr=yerror, xerr=xerror, fmt=".", label="data", color="blue")
+    ax1.errorbar(xdata, ydata, yerr=yerror, xerr=xerror, fmt=".", label="data", color="black")
     # Plot the data with error bars, fmt makes it data points not a line, label is
     # a string which will be printed in the legend, you should edit this string.
 
@@ -133,8 +130,8 @@ def main():
     # loc specifies the location
 
     ax1.set_xlabel("Time(s)")
-    ax1.set_ylabel("Max Angle of Pendulum")
-    ax1.set_title("Relationship between Time(s) and Maximum Angle(rad) of a Pendulum of Length 40.37cm")
+    ax1.set_ylabel("Angle(rad) of Pendulum")
+    ax1.set_title("Relationship between Time(s) and Angle(rad) of a Pendulum of Length 40.0cm")
     # Here is where you change how your graph is labelled.
 
     #ax1.set_xscale('log')
@@ -145,22 +142,22 @@ def main():
 
     print("A:", a, "+/-", u_a)
     print("tau:", tau, "+/-", u_tau)
-    # print("T:", T, "+/-", u_T)
-    # print("phi:", phi, "+/-", u_phi)
+    print("T:", T, "+/-", u_T)
+    print("phi:", phi, "+/-", u_phi)
     # prints the various values with uncertainties
     # This is printed to your screen, not on the graph.
     # If you want to print it on the graph, use plt.text(), details at
     # https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.text.html
 
     residual = ydata - my_func(xdata, *popt)
-    ax2.errorbar(xdata, residual, yerr=yerror, xerr=xerror, fmt=".", color="blue")
+    ax2.errorbar(xdata, residual, yerr=yerror, xerr=xerror, fmt=".", color="black")
     # Plot the residuals with error bars.
 
     ax2.axhline(y=0, color="black")
     # Plot the y=0 line for context.
 
     ax2.set_xlabel("Time(s)")
-    ax2.set_ylabel("Max Angle of Pendulum")
+    ax2.set_ylabel("Angle(rad) of Pendulum")
     ax2.set_title("Residuals of the fit")
     # Here is where you change how your graph is labelled.
 

@@ -47,7 +47,9 @@ def linear(t, m, b):
     return m*t+b
 
 def quadratic(t, a, b, c):
-    print("bro", c)
+    print("a: ", c)
+    print("b: ", c)
+    print("c: ", c)
     return a*t**2 + b*t + c
 
 def powerlaw(t, a, b):
@@ -65,12 +67,11 @@ def main():
     my_func = quadratic
     # Change to whichever of the 5 functions you want to fit
 
-    plt.rcParams.update({'font.size': 10})
-    plt.rcParams['figure.figsize'] = 10, 9
+    plt.rcParams.update({'font.size': 14})
     # Change the fontsize of the graphs to make it easier to read.
     # Also change the picture size, useful for the save-to-file option.
 
-    data=loadtxt(filename, usecols=(1,0,2,3), skiprows=1, unpack=True)
+    data=loadtxt(filename, usecols=(0,1,2,3), skiprows=1, unpack=True)
     # Load file, take columns 0 & 1 & 2 & 3, skip 1 row, unpack means
     # the data points are line by line instead of line 2 being all x values
     # and line 3 being all the y values, etc.
@@ -118,7 +119,7 @@ def main():
     # The gridspec_kw argument makes the top plot 2 times taller than the bottom plot.
     # You can adjust the relative heights by, say, changing [2, 1] to [3, 1].
     
-    ax1.errorbar(xdata, ydata, yerr=yerror, xerr=xerror, fmt=".", label="data", color="black")
+    ax1.errorbar(xdata, ydata, yerr=yerror, xerr=xerror, fmt=".", label="data", color="blue")
     # Plot the data with error bars, fmt makes it data points not a line, label is
     # a string which will be printed in the legend, you should edit this string.
 
@@ -130,9 +131,9 @@ def main():
     # Prints a box using what's in the "label" strings in the previous two lines.
     # loc specifies the location
 
-    ax1.set_xlabel("Initial Angle(rad) of Pendulum")
-    ax1.set_ylabel("Period(s) of Pendulum")
-    ax1.set_title("Relationship between Initial Angle(Θ) and Period(T) of a Pendulum of Length 40.37cm")
+    ax1.set_xlabel("Initial Angle of Pendulum")
+    ax1.set_ylabel("Period of Pendulum")
+    ax1.set_title("Relationship between Initial Angle and Period of a Pendulum of Length 40.37cm")
     # Here is where you change how your graph is labelled.
 
     #ax1.set_xscale('log')
@@ -151,14 +152,14 @@ def main():
     # https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.text.html 
     
     residual = ydata - my_func(xdata, *popt)
-    ax2.errorbar(xdata, residual, yerr=yerror, xerr=xerror, fmt=".", color="black")
+    ax2.errorbar(xdata, residual, yerr=yerror, xerr=xerror, fmt=".", color="blue")
     # Plot the residuals with error bars.
     
     ax2.axhline(y=0, color="black")    
     # Plot the y=0 line for context.
     
-    ax2.set_xlabel("Initial Angle(rad) of Pendulum")
-    ax2.set_ylabel("Period(s) of Pendulum")
+    ax2.set_xlabel("Initial Angle of Pendulum")
+    ax2.set_ylabel("Period of Pendulum")
     ax2.set_title("Residuals of the fit")
     # Here is where you change how your graph is labelled.
 
