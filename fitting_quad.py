@@ -128,6 +128,7 @@ def main():
     # Plot the data with error bars, fmt makes it data points not a line, label is
     # a string which will be printed in the legend, you should edit this string.
 
+
     ax1.plot(xs, curve, label="best fit", color="black")
     # Plot the best fit curve on top of the data points as a line.
     # NOTE: you may want to change the value of label to something better!!
@@ -139,11 +140,13 @@ def main():
     ax1.set_xlabel("Length")
     ax1.set_ylabel("Q Factor")
     ax1.set_title("Best fit of some data points")
+    ax1.text(0.4, 100, 'y = ' + '{:.2f}'.format(b) + ' + {:.2f}'.format(a) + 'x', size=8)
     # Here is where you change how your graph is labelled.
 
     #ax1.set_xscale('log')
     #ax1.set_yscale('log')
     # uncomment out the above two lines if you want to make it log-log scale
+
 
 ########### HERE!!! ##############    
     

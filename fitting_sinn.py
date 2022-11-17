@@ -82,7 +82,7 @@ def main():
 
 ########### HERE!!! ##############
 
-    init_guess = (10, 27, 27, 50)
+    init_guess = (10000, 27, 27, 50)
     # Your initial guess of (a, tau, T, phi)
     # For sinusoidal functions, guessing T correctly is critically important
     # Note: your initial guess must have the same number of parameters as
