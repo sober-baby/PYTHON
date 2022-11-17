@@ -22,7 +22,7 @@ function).
 If you want to change the file name, that's the next line below this comment.
 """
 
-filename="mydata.txt"
+filename="mydataq.txt"
 """ 
 Change this if your filename is different.
 
@@ -65,7 +65,6 @@ def main():
     # Change to whichever of the 5 functions you want to fit
 
     plt.rcParams.update({'font.size': 14})
-    plt.rcParams['figure.figsize'] = 10, 9
     # Change the fontsize of the graphs to make it easier to read.
     # Also change the picture size, useful for the save-to-file option.
 
@@ -125,7 +124,7 @@ def main():
     # The gridspec_kw argument makes the top plot 2 times taller than the bottom plot.
     # You can adjust the relative heights by, say, changing [2, 1] to [3, 1].
     
-    ax1.errorbar(xdata, ydata, yerr=yerror, xerr=xerror, fmt=".", label="data", color="black")
+    ax1.errorbar(xdata, ydata, yerr=yerror, xerr=xerror, fmt=".", label="data", color="blue")
     # Plot the data with error bars, fmt makes it data points not a line, label is
     # a string which will be printed in the legend, you should edit this string.
 
@@ -137,8 +136,8 @@ def main():
     # Prints a box using what's in the "label" strings in the previous two lines.
     # loc specifies the location
 
-    ax1.set_xlabel("xdata")
-    ax1.set_ylabel("ydata")
+    ax1.set_xlabel("Length")
+    ax1.set_ylabel("Q Factor")
     ax1.set_title("Best fit of some data points")
     # Here is where you change how your graph is labelled.
 
@@ -161,14 +160,14 @@ def main():
     # https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.text.html 
     
     residual = ydata - my_func(xdata, *popt)
-    ax2.errorbar(xdata, residual, yerr=yerror, xerr=xerror, fmt=".", color="black")
+    ax2.errorbar(xdata, residual, yerr=yerror, xerr=xerror, fmt=".", color="blue")
     # Plot the residuals with error bars.
     
     ax2.axhline(y=0, color="black")    
     # Plot the y=0 line for context.
     
-    ax2.set_xlabel("xdata")
-    ax2.set_ylabel("ydata")
+    ax2.set_xlabel("Length")
+    ax2.set_ylabel("Q Factor")
     ax2.set_title("Residuals of the fit")
     # Here is where you change how your graph is labelled.
 
