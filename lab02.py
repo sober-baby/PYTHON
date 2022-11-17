@@ -196,7 +196,7 @@ if __name__ == '__main__':
     
     
     #produce an error, then try adding 10
-    current_value = 12
+    current_value = 10
     divide(0)
     add(5) #expected output: you should decide
     get_current_value()
