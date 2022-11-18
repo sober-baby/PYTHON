@@ -22,7 +22,7 @@ function).
 If you want to change the file name, that's the next line below this comment.
 """
 
-filename="mydatalog_root.txt"
+filename="mydata_quad.txt"
 """ 
 Change this if your filename is different.
 
@@ -44,16 +44,15 @@ def exponential(t, a, tau):
     return a*np.exp(-t/tau)
 
 def linear(t, m, b):
-    print("m: ", m)
-    print("b: ", b)
     return m*t+b
 
 def quadratic(t, a, b, c):
-    return a*t*2 + b*t + c
+    print("a: ", c)
+    print("b: ", c)
+    print("c: ", c)
+    return a*t**2 + b*t + c
 
 def powerlaw(t, a, b):
-    print(a)
-    print(b)
     return a*t**b
 """
 The above five functions should be all you need for PHY180
@@ -65,11 +64,11 @@ highlighted by comments that look like:
 """
 
 def main():    
-    my_func = linear
+    my_func = quadratic
     # Change to whichever of the 5 functions you want to fit
 
     plt.rcParams.update({'font.size': 14})
-    #plt.rcParams['figure.figsize'] = 10, 9
+    plt.rcParams['figure.figsize'] = 10, 9
     # Change the fontsize of the graphs to make it easier to read.
     # Also change the picture size, useful for the save-to-file option.
 
@@ -85,8 +84,10 @@ def main():
     # Finished importing data, naming it sensibly.
 
 ########### HERE!!! ##############
-               
-    init_guess = (0.30102999566, -0.30102999566)
+      
+    init_guess = (0, 0, 1)
+    # Your initial guess of (a, b, c)         
+    # init_guess = (0.55, 100.0, 1.667, 0.0)
     # Your initial guess of (a, tau, T, phi)
     # For sinusoidal functions, guessing T correctly is critically important
     # Note: your initial guess must have the same number of parameters as
@@ -96,13 +97,19 @@ def main():
     # The best fit values are popt[], while pcov[] tells us the uncertainties.
 
 ########### HERE!!! ##############
-    
+
     a=popt[0]
+    b=popt[1]
+    c=popt[2]
+    u_a=pcov[0,0]**(0.5)
+    u_b=pcov[1,1]**(0.5)
+    u_c=pcov[2,2]**(0.5)
+    #a=popt[0]
     #tau=popt[1]
     #T=popt[2]
     #phi=popt[3]
     # best fit values are named nicely
-    u_a=pcov[0,0]**(0.5)
+    #u_a=pcov[0,0]**(0.5)
     #u_tau=pcov[1,1]**(0.5)
     #u_T=pcov[2,2]**(0.5)
     #u_phi=pcov[3,3]**(0.5)
@@ -121,7 +128,7 @@ def main():
     # The gridspec_kw argument makes the top plot 2 times taller than the bottom plot.
     # You can adjust the relative heights by, say, changing [2, 1] to [3, 1].
     
-    ax1.errorbar(xdata, ydata, yerr=yerror, xerr=xerror, fmt=".", label="data", color="blue")
+    ax1.errorbar(xdata, ydata, yerr=yerror, xerr=xerror, fmt=".", label="data", color="black")
     # Plot the data with error bars, fmt makes it data points not a line, label is
     # a string which will be printed in the legend, you should edit this string.
 
@@ -133,9 +140,9 @@ def main():
     # Prints a box using what's in the "label" strings in the previous two lines.
     # loc specifies the location
 
-    ax1.set_xlabel("Length (m)")
-    ax1.set_ylabel("Period (s)")
-    ax1.set_title("Period vs. Length of a Pendulum")
+    ax1.set_xlabel("xdata")
+    ax1.set_ylabel("ydata")
+    ax1.set_title("Best fit of some data points")
     # Here is where you change how your graph is labelled.
 
     #ax1.set_xscale('log')
@@ -144,6 +151,9 @@ def main():
 
 ########### HERE!!! ##############    
     
+    print("a:", a, "+/-", u_a)
+    print("b:", b, "+/-", u_b)
+    print("c:", c, "+/-", u_c)
     #print("A:", a, "+/-", u_a)
     #print("tau:", tau, "+/-", u_tau)
     #print("T:", T, "+/-", u_T)
@@ -154,14 +164,14 @@ def main():
     # https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.text.html 
     
     residual = ydata - my_func(xdata, *popt)
-    ax2.errorbar(xdata, residual, yerr=yerror, xerr=xerror, fmt=".", color="blue")
+    ax2.errorbar(xdata, residual, yerr=yerror, xerr=xerror, fmt=".", color="black")
     # Plot the residuals with error bars.
     
     ax2.axhline(y=0, color="black")    
     # Plot the y=0 line for context.
     
-    ax2.set_xlabel("Length (m)")
-    ax2.set_ylabel("Period (s)")
+    ax2.set_xlabel("xdata")
+    ax2.set_ylabel("ydata")
     ax2.set_title("Residuals of the fit")
     # Here is where you change how your graph is labelled.
 
