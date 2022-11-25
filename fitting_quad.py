@@ -140,7 +140,6 @@ def main():
     ax1.set_xlabel("Length")
     ax1.set_ylabel("Q Factor")
     ax1.set_title("Best fit of some data points")
-    ax1.text(0.4, 100, 'y = ' + '{:.2f}'.format(b) + ' + {:.2f}'.format(a) + 'x', size=8)
     # Here is where you change how your graph is labelled.
 
     #ax1.set_xscale('log')

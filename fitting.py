@@ -47,8 +47,8 @@ def linear(t, m, b):
     return m*t+b
 
 def quadratic(t, a, b, c):
-    print("a: ", a)
-    print("b: ", b)
+    print("a: ", c)
+    print("b: ", c)
     print("c: ", c)
     return a*t**2 + b*t + c
 
