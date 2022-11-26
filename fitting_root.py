@@ -22,7 +22,7 @@ function).
 If you want to change the file name, that's the next line below this comment.
 """
 
-filename="mydatalog_root.txt"
+filename="mydata_root.txt"
 """ 
 Change this if your filename is different.
 
@@ -65,7 +65,7 @@ highlighted by comments that look like:
 """
 
 def main():    
-    my_func = linear
+    my_func = powerlaw
     # Change to whichever of the 5 functions you want to fit
 
     plt.rcParams.update({'font.size': 14})
