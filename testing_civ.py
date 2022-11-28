@@ -171,9 +171,9 @@ def get_fos(tension_max, compression_max, sheer_max, glue_max, buck_1_max, buck_
     FOS_comp = compression_max / s_top;
     FOS_shear = sheer_max / t_cent;
     FOS_glue = glue_max / t_glue;
-    FOS_buck1 = s_buck_1_max / s_top;
-    FOS_buck2 = s_buck_2_max / s_top;
-    FOS_buck3 = s_buck_3_max / s_top;
+    FOS_buck1 = buck_1_max / s_top;
+    FOS_buck2 = buck_2_max / s_top;
+    FOS_buck3 = buck_3_max / s_top;
     FOS_buckV = buck_V_max / T_cent;
     list.append(FOS_tens)
     list.append(FOS_comp)
@@ -245,7 +245,7 @@ plt.xlim(-25, 1225)
 plt.ylim(-1000,80000)
 
 ''' uncomment to get graph'''
-#plt.show()
+plt.show()
 
 
 ''' enter lists of Ai, yi and Ii, return I_total'''
@@ -294,34 +294,36 @@ area = get_remaining_area(total_a, A)
 q_cent = get_q(Aq, yq)
 q_glue = get_q(Ag, yg)
 applied_stress = get_stress(S_max, B_max, get_ybar_(A, y), I_tot, q_cent, q_glue, 76.27, 6.27*2)
-S_top = applied_stress[0]
-S_bot = applied_stress[1]
-T_cent = applied_stress[2]
-T_glue = applied_stress[3]
+s_top = applied_stress[0]
+s_bot = applied_stress[1]
+t_cent = applied_stress[2]
+t_glue = applied_stress[3]
 
 
-#tau
-sheer_b = sheer_buck(5, E, mu, t, (75-t), 400)
-
-
-#def thin_plate_buck(E, mu, t, b1, b2, b3):
+'''thin plate buckling calculation
 tpb = thin_plate_buck(E, mu, t, 78.73, 10.635, 32.965)
 print(tpb[0])
 print(tpb[1])
 print(tpb[2])
-
-#fos
-#def get_fos(tension_max, compression_max, sheer_max, glue_max, buck_1_max, buck_2_max, buck_3_max, buck_V_max,
-        #s_top, s_bot, t_cent, t_glue):
-list_fos = get_fos(tension_max, compression_max, sheer_max, glue_max, tpb[0], tpb[1], tpb[2], sheer_b,
-                 s_top, s_bot, t_cent, t_glue, S_buck1, S_buck2, S_buck3, sheer_buck)
-
-
+#sheer stress, case 4
+sheer_b = sheer_buck(5, E, mu, t, (75-t), 400)
 '''
+
+'''fos calculation
+
+list_fos = get_fos(tension_max, compression_max, sheer_max, glue_max, tpb[0], tpb[1], tpb[2], sheer_b,
+                 s_top, s_bot, t_cent, t_glue)
+
+list_fos_int = [round(item, 4) for item in list_fos]
+print(list_fos_int)
+'''
+
+'''area usage
 print("Used area:", int(total_a-area), "Remaining area:", int(area), "Used percentage:", int((total_a-area)/total_a*100),"%")
 print(ybar)
 print(q_glue)
 '''
+
 
 
 
