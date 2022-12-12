@@ -99,14 +99,49 @@ print(su)
 # O(nk(k+1)/2)
 
 def filter_out_odds(L):
+    if len(L) == 0:
+        return []
+    else:
+        if L[0]%2 == 0:
+            return [L[0]] + filter_out_odds(L[1:])
+        else:
+            return filter_out_odds(L[1:])
+
+#print(filter_out_odds([5, -2, 4, 0, 3, 7, 8]))
 
 
+def mystery(L, e, i = 0, j = None):
+    if j == None or j > len(L):
+        j = len(L)
+    if i == j:
+        return False
+    if i == j-1:
+        return L[i] == e
+    for k in range(i, j, (j-i)//2):
+        if mystery(L, e, k, k + (j-i)//2):
+            return True
+    return False
 
-print(filter_out_odds([5, -2, 4, 0, 3, 7, 8]))
+L = [1,2,3,4]
+e = 3
+print(mystery(L, e, i=0, j=None))
 
 
+def print_all(alphabet, n, start_str = ""):
+    '''Print all the strings off length n over
+    the alphabet, with start_str at the beginning
+    '''
+    #When n is 0, all that we need is just to print start_str
+    if n == 0:
+        print(start_str)
+        return
 
+    for letter in alphabet:
+        #if n is 0, this is the same as
+        #print(start_str+letter)
+        print_all(alphabet, n-1, start_str+letter)
 
+print(print_all("hello", 5, ""))
 
 
 
