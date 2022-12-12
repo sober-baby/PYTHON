@@ -295,7 +295,7 @@ print("Used area:", int(total_a-area), "Remaining area:", int(area), "Used perce
 plt.rcParams.update({'font.size': 8})
 
 # SFD Envelope:
-'''
+
 plt.subplot(2, 1, 1)
 plt.plot(x, SFD_env, color="blue")
 plt.title("SFD Envelope")
@@ -316,7 +316,7 @@ plt.axhline(0, color="black")
 plt.axvline(0, color="black")
 plt.xlim(-25, 1225)
 plt.ylim(-1000,80000)
-'''
+
 plt.subplots_adjust(left=0.1,
                     bottom=0.1,
                     right=0.9,
@@ -324,6 +324,7 @@ plt.subplots_adjust(left=0.1,
                     wspace=0.4,
                     hspace=0.4)
 
+'''
 plt.subplot(3, 3, 1)
 plt.plot(x, SFD_env, color = "black", linestyle='dashed')
 plt.xlabel('Distance along bridge (mm)')
@@ -386,5 +387,5 @@ plt.axvline(0, color="black")
 plt.xlim(0,1200)
 plt.ylim(400000, 0)
 
-
+'''
 plt.show()

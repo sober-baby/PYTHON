@@ -1,86 +1,83 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import math
-# L = length, n = points that are analyzed on the bridge(L/1), P = weight of train
+
 L = 1200
 n = 1200
-P = 400
+P = -400
 
-x = []
-for i in range (L + 1):
-    x.append(i)
-
-x_train_initial = [52, 228, 392, 568, 732, 908]
+x_i = [52, 228, 392, 568, 732, 908]
 P_train = [P/6, P/6, P/6, P/6, P/6, P/6]
 n_train = 241
 sfd = []
 bmd = []
+
+
+x = []
+for i in range (L + 1):
+    x.append(i)
 
 for i in range(n_train):
 
     sfd.append([0]*1201)
     bmd.append([0]*1201)
 
-# Calculate shear force and bending moment across the beam in 1200 points at all positions
 for i in range(n_train):
-    # Make list of position of point loads at n_train = i
+
+    BMD = [0]*(n + 1)
+    SFD = [0]*(n + 1)
+
     x_train = [0]*6
-    for z in range(len(x_train_initial)):
-        x_train[z] = x_train_initial[z] + i*240/(n_train - 1)
+    for z in range(len(x_i)):
+        x_train[z] = x_i[z] + i*240/(n_train - 1)
 
-    # Calculate reactions
-    end_y = 0
+    b_y = 0
     for a in range (len(x_train)):
-        end_y += x_train[a] * P_train[a]
-    end_y = end_y/L
-    start_y = 400 - end_y
+        b_y += x_train[a] * P_train[a]
+    b_y = - b_y/L
+    a_y = 400 - b_y
 
-    # Store point forces
     point_f = [0]*(n + 1)
-    point_f[0] = start_y
-    point_f[n] = end_y
+    point_f[0] = a_y
+    point_f[n] = b_y
     for b in range (len(x_train)):
         point_f[int(x_train[b])] = P_train[b]
 
-    # Construct list of SFD for train at i
-    SF = [0]*(n + 1)
-    res = 0
+    temp = 0
     for c in range(n + 1):
-        res += point_f[c]
-        SF[c] = res
-    # Construct list of BMD for train at i
-    BM = [0]*(n + 1)
-    res = 0
-    for d in range(n + 1):
-        res += SF[d]
-        BM[d] = res
+        temp += point_f[c]
+        SFD[c] = temp
+
+    temp = 0
+    for m in range(n + 1):
+        temp += SFD[m]
+        BMD[m] = temp
 
 
-    for e in range(1201):
-           sfd[i][e] = SF[e]
-           bmd[i][e] = BM[e]
+    for n in range(1201):
+           sfd[i][n] = SFD[n]
+           bmd[i][n] = BMD[n]
 
 
-def get_abs(L):
-    L_transpose = np.array(L).transpose()
+def get_abs(l):
+    L_trans = np.array(l).transpose()
     L_min = []
     L_max = []
-    L_max_mag = [0]*1201
+    L_abs_max = [0]*1201
     for i in range(1201):
-        L_min.append(min(L_transpose[i]))
-        L_max.append(max(L_transpose[i]))
+        L_min.append(min(L_trans[i]))
+        L_max.append(max(L_trans[i]))
 
     for i in range(1201):
         if L_min[i] < 0:
-            if -1*L_min[i] > L_max[i]:
-                L_max_mag[i] = L_min[i]
+            if L_min[i] < L_max[i] * -1:
+                L_abs_max[i] = L_min[i]
             else:
-                L_max_mag[i] = L_max[i]
-
+                L_abs_max[i] = L_max[i]
         else:
-            L_max_mag[i] = L_max[i]
+            L_abs_max[i] = L_max[i]
 
-    return L_max_mag
+    return L_abs_max
 
 # Function to get y_bar
 def get_ybar_(A, y):
@@ -114,7 +111,7 @@ def get_q(Aq, yq):
         q += Aq[i] * yq[i]
     return q
 
-def get_stress(s_max, b_max, y, I, q_c, q_g, height, glue_location):
+def get_sttemps(s_max, b_max, y, I, q_c, q_g, height, glue_location):
     print(b_max)
     print(y)
     print(I)
@@ -138,11 +135,11 @@ def sheer_buck(k, E, mu, t, a, n):
     sheer_buck = (k * pi**2 * E) / (12 * (1 - mu ** 2)) * ((t / a) ** 2 + (t / n) ** 2);
     return sheer_buck
 
-def get_fos(tension_max, compression_max, sheer_max, glue_max, buck_1_max, buck_2_max, buck_3_max, buck_V_max,
+def get_fos(tension_max, comptempsion_max, sheer_max, glue_max, buck_1_max, buck_2_max, buck_3_max, buck_V_max,
         s_top, s_bot, t_cent, t_glue):
     list = []
     FOS_tens = tension_max / s_bot;
-    FOS_comp = compression_max / s_top;
+    FOS_comp = comptempsion_max / s_top;
     FOS_shear = sheer_max / t_cent;
     FOS_glue = glue_max / t_glue;
     FOS_buck1 = buck_1_max / s_top;
@@ -181,10 +178,8 @@ def force_capacites(fos, m, v):
     list.append(buck_fail)
     return list
 
-#Q at glue location
-#def get_Q()
+
 SFD_env = get_abs(sfd)
-SFD_env[0] = 0
 BMD_env = get_abs(bmd)
 S_max = max(SFD_env, key=abs)
 B_max = max(BMD_env, key=abs)
@@ -205,7 +200,7 @@ y = [0.635, 40, 40, 79.365, 79.365, 80.635, 81.905, 83.175]
 I = [13.656, 49187.523, 49187.523, 1.194890083,1.194890083, 17.07, 17.07, 17.07]
 
 
-#dimentions of failed designs
+#dimentions of some failed designs
 
 '''
 A = [127, 127, 127, 127, 14.3129, 14.3129,14.3129,14.3129,92.0242,92.0242,101.6]
@@ -233,9 +228,8 @@ for i in range (3):
     yq.append(y[len(y) - 1 - i] - 58.25259141692056)
 
 # Dimensions for finding Q_glue
-#design 0
-Ag = [127]
-yg = [34.235]
+Ag = [127,127,127]
+yg = [22.3824,23.6524,24.9224 ]
 
 # Useful constants
 E = 4000
@@ -245,7 +239,7 @@ total_a = 825804
 
 # Material properties
 tension_max = 30
-compression_max = 6
+comptempsion_max = 6
 sheer_max = 4
 glue_max = 2
 
@@ -258,12 +252,12 @@ print("q_cent:", q_cent)
 q_glue = get_q(Ag, yg)
 print("y bar", get_ybar_(A, y))
 
-# stress calc
-applied_stress = get_stress(S_max, B_max, get_ybar_(A, y), I_tot, q_cent, q_glue, 76.27, 6.27*2)
-s_top = applied_stress[0]
-s_bot = applied_stress[1]
-t_cent = applied_stress[2]
-t_glue = applied_stress[3]
+# sttemps calc
+applied_sttemps = get_sttemps(S_max, B_max, get_ybar_(A, y), I_tot, q_cent, q_glue, 76.27, 6.27*2)
+s_top = applied_sttemps[0]
+s_bot = applied_sttemps[1]
+t_cent = applied_sttemps[2]
+t_glue = applied_sttemps[3]
 
 
 #thin plate buckling calculation: case 1, 2, 3
@@ -272,14 +266,14 @@ print(tpb[0])
 print("case2:", tpb[1])
 print("case3:", tpb[2])
 
-#sheer stress, case 4
+#sheer sttemps, case 4
 sheer_b = sheer_buck(5, E, mu, t, (85-t), 120)
 
-#def get_fos(tension_max, compression_max, sheer_max, glue_max, buck_1_max, buck_2_max, buck_3_max, buck_V_max,
+#def get_fos(tension_max, comptempsion_max, sheer_max, glue_max, buck_1_max, buck_2_max, buck_3_max, buck_V_max,
        # s_top, s_bot, t_cent, t_glue):
 
 #fos calculation
-list_fos = get_fos(tension_max, compression_max, sheer_max, glue_max, tpb[0], tpb[1], tpb[2], sheer_b,
+list_fos = get_fos(tension_max, comptempsion_max, sheer_max, glue_max, tpb[0], tpb[1], tpb[2], sheer_b,
                  s_top, s_bot, t_cent, t_glue)
 list_fos_int = [round(item, 4) for item in list_fos]
 print(list_fos_int)
