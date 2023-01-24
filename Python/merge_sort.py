@@ -42,3 +42,27 @@ def merge_sort(L):
 L = [2,4,1,3,5,6,2,4]
 L1 = merge_sort(L)
 print(L1)
+
+
+
+
+
+A = [[1 ,2], [3,4]]
+print(A)
+print("check1:",A[:][:][:][:][:][:])
+B = A[:][0]
+print(B)
+B[0] = 5
+print(B)
+
+
+
+
+
+
+
+
+
+
+
+
