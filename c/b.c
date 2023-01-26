@@ -20,6 +20,7 @@ int main()
     *p_a = 1;
     free(p_a); //if done after p_a = &b (1) will crash
 
+
     int b = 2;
     p_a = &b; //p_a is now a pointer to b
     *p_a = 3; //b is now 3, *p_a is 3
@@ -30,7 +31,7 @@ int main()
     p_a = c;
     p_a[0]; //5
     p_a++; //p_a is now a pointer to c[1], adress to the next integer in the array
-    p_a[0]; //8
+    p_a[0]; //8 
     *(p_a - 1); //5
 
     *p_a = 9;
