@@ -45,15 +45,49 @@ char* my_strcpy_fancy(char* dest, char* src)
     return old_dest;
 }
 
+void get_int_arr_from_input(int **p_arr, int *p_n)
+{
+    int n;
+    printf("Number of elements that are coming: ");
+    scanf("%d", &n);
+    
+    *p_arr = (int*)malloc(n * sizeof(int));
+    for (int i = 0; i < n; i++)
+    {
+        printf("Enter element %d: ", i);
+        scanf("%d", &(*p_arr)[i]);
+    }
+
+
+    //get the number of integers n in the input
+    // then get n intergeres from the input
+
+}
+int main()
+{       
+    int *my_arr;
+    int n;
+    get_int_arr_from_input(&my_arr, &n);
+
+    for (int i = 0; i < n; i++)
+    {
+        printf("%d ", my_arr[i]);
+    }
+
+}
 int main1()
 {
     int a = 0;
     scanf("%d", &a);
     printf("You just inputted %d\n", a);
 
+    char* p_a = (char*)malloc(100); 
+    int* int_p_a  = (int*)malloc(sizeof(int)); 
+    scanf("%s", p_a);
+
 
 }
-int main()
+int main2()
 {
     char s1[100];
     char s2[] = "abc";
