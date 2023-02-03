@@ -1,28 +1,27 @@
 #include <stdio.h>
 
-struct Indices {
+struct a {
     int first;
     int last;
 };
 
-struct Indices find_indices(int lst[], int n, int target) { 
-    struct Indices indices = {-1, -1};
+struct a find_num(int arr[], int n, int target) { 
+    struct a num = {-1, -1};
     for (int i = 0; i < n; i++) { 
-        if (lst[i] == target) { 
-            if (indices.first == -1) {
-                indices.first = i;
+        if (arr[i] == target) { 
+            if (num.first == -1) {
+                num.first = i;
             }
-            indices.last = i;
+            num.last = i;
         }
     }
-    return indices;
+    return num;
 }
     
 
 int main() {
-    int lst[] = {1, 2, 2, 2, 3, 4, 5};
-    int n = sizeof(lst) / sizeof(lst[0]);
-    struct Indices indices = find_indices(lst, n, 2);
-    printf("first: %d, last: %d\n", indices.first, indices.last); 
+    int arr[] = {1, 2, 2, 2, 3, 4, 5};
+    struct a num = find_num(arr, 7, 2);
+    printf("first: %d, last: %d\n", num.first, num.last); 
     return 0;
 }
