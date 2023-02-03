@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "header.h"
 
 void set_int1(int x)
 {
@@ -12,11 +13,6 @@ void set_int2(int *p_x)
 *p_x = 42;
 }
 
-typedef struct student1{
-char name[200];
-char student_number[11];
-int year;
-} student1;
 
 // function that sets the name to "Default"
 void set_default_name(student1 *p_s)
@@ -93,12 +89,12 @@ int main()
     set_default_name(&s1);
     strcpy(s1.student_number, "123450");
     s1.year = 1;
-    //printf("Name: %s\n", s1.name);
-    //printf("Student Number %s\n", s1.student_number);
-    //printf("Year: %d\n", s1.year);
+    printf("Name: %s\n", s1.name);
+    printf("Student Number %s\n", s1.student_number);
+    printf("Year: %d\n", s1.year);
 
     set_name(&s1, "Tyrone");
-    printf("Name: %s\n", s1.name);
+    //printf("Name: %s\n", s1.name);
     //set_name2(s2.name, "Tyrone");
     //printf("Name: %s\n", s2.name);
 
