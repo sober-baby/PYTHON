@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/James/OneDrive/Documents/GitHub/PYTHON/__pycache__",
-      "program": "c:/Users/James/OneDrive/Documents/GitHub/PYTHON/__pycache__/build/Debug/outDebug",
+      "cwd": "c:/PYTHON",
+      "program": "c:/PYTHON/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

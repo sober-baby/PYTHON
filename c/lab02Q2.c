@@ -47,6 +47,6 @@ int main()
     char *str2 = "World";
     char *a = con_index(&str1, 5, &str2, 5);
     char *b = con_pointer(str1, 5, str2, 5);
-    //printf("%s\n", a);
+    printf("%s\n", a);
     printf("%s\n", b);
 }
