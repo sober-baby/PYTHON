@@ -12,35 +12,33 @@ int compare(int *p_a, int *p_b)
 
 
 // function that takes in a string and returns a double
-double my_atof(char *str){
+double my_atof(const char *str)
+{
     int i = 0;
-    int sign = 1;
-    double result = 0;
-    double decimal = 0;
-    int decimal_flag = 0;
-    int decimal_count = 0;
-    while(str[i] != '\0'){
-        if(str[i] == '-'){
-            sign = -1;
-        }
-        else if(str[i] == '.'){
-            decimal_flag = 1;
-        }
-        else if(decimal_flag == 0){
-            result = result * 10 + (str[i] - '0');
-        }
-        else{
-            decimal = decimal * 10 + (str[i] - '0');
-            decimal_count++;
-        }
+    while(str[i] != "="){
         i++;
     }
-    for(int i = 0; i < decimal_count; i++){
-        decimal = decimal / 10;
-    }
-    return sign * (result + decimal);
+    i++;
 
+    double result = 0;
+    int sign = 1;
+    if(str[i] == "-"){
+        sign = -1;
+        i++;
+    }
+    while(str[i] != "."){
+        result = result * 10 + (str[i] - '0');
+        i++;
+    }
+    i++;
+    double pow10 = 0.1;
+    while(str[i] != "\n"){
+        result += (str[i] - '0') * pow10;
+        pow10 *= 0.1;
+    }
+    return result * sign;
 }
+
 
 // midterm 2016 Question 2:
 
