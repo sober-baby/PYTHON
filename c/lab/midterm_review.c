@@ -14,12 +14,7 @@ int compare(int *p_a, int *p_b)
 // function that takes in a string and returns a double
 double my_atof(const char *str)
 {
-    int i = 0;
-    while(str[i] != "="){
-        i++;
-    }
-    i++;
-
+    int i = 0;  
     double result = 0;
     int sign = 1;
     if(str[i] == "-"){
@@ -66,11 +61,16 @@ typedef struct student
 
 int main()
 {
-    student s1;
+    /*
+     student s1;
     s1.name = (char *)malloc(sizeof(char) * 10);
     s1.name = "hello";
     printf("%s", s1.name);
     double d = my_atof("123.456");
+    printf("%f", d);
+    */
+    char *str = "123.456";
+    double d = my_atof(str);
     printf("%f", d);
 
     /*
