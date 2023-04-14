@@ -84,7 +84,8 @@ bool checkLegalInDirection(char board[][26], int n, int row, int col,
 
   if (deltaRow == 0 && deltaCol == 0) {  // continuous straight line
     check = false;
-  } else {
+  } 
+  else {
     int count = 0;  // counts the number of opponents
     while (positionInBounds(n, row + deltaRow, col + deltaCol)) {
       if (board[row + deltaRow][col + deltaCol] == 'U') {
@@ -98,9 +99,10 @@ bool checkLegalInDirection(char board[][26], int n, int row, int col,
           check = true;
           break;
         }
-      } else {
-        count++;
-      }
+      } 
+    
+      count++;
+      
       deltaRow += dr;
       deltaCol += dc;
     }
@@ -159,6 +161,12 @@ void updateBoard(int n, char board[][26], char colour, int row, int col) {
   }
 }
 
+void removeNewline(char *str) {
+  char *newline = strchr(str, '\n');
+  if (newline) {
+    *newline = '\0';
+  }
+}
 
 // function for user moves
 void userMove(char board[][26], int n, char colour, int *score, bool *end,
@@ -166,8 +174,10 @@ void userMove(char board[][26], int n, char colour, int *score, bool *end,
   char move[2 + 1];
   if (availableMoves(board, n, colour)) {
     printf("Enter move for colour %c (RowCol): ", colour);
-    getchar();
-    fgets(move, sizeof(move), stdin);
+    // getchar();
+    // fgets(move, sizeof(move), stdin);
+    // removeNewline(move);
+    scanf(" %c%c", &move[0], &move[1]);
     int row = inputConvert(move);
     int col = inputConvert(move + 1);
 
@@ -192,7 +202,8 @@ void computerM(int n, char board[][26], char colour, int *score,
   int count = 0, row, col;
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < n; j++) {
-      if (validMove(board, n, colour, i, j) > count) {
+        int valid = validMove(board, n, colour, i, j);
+      if (valid > count) {
         count = validMove(board, n, colour, i, j);
         row = i, col = j;
       }
@@ -247,11 +258,11 @@ int main(void) {
   printBoard(board, n);
   // rounds of operation
   // board not full,
-  int count = 0;
+  bool count = 0;
   bool available = true, availableU = true, availableC = true;
   while (!(isBoardFull(n, board) || end) && available) {
     // change colour
-    if (count % 2) {
+    if (count) {
       colour = 'W';
     } else
       colour = 'B';
@@ -261,7 +272,7 @@ int main(void) {
     } else {
       userMove(board, n, colouru, &scoreU, &end, &availableU);
     }
-    count++;
+    count = !count;
 
     if (!(availableU && availableC)) available = false;
   }
