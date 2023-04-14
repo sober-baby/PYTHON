@@ -7,8 +7,10 @@ int compare(int *p_a, int *p_b)
 {
     int *p_a_i = (int *)p_a;
     int *p_b_i = (int *)p_b;
-    return *p_a_i - *p_b_i;
+    return *p_a_i - *p_a_i;
 }
+
+
 
 
 // function that takes in a string and returns a double
@@ -68,11 +70,11 @@ int main()
     printf("%s", s1.name);
     double d = my_atof("123.456");
     printf("%f", d);
-    */
+    
     char *str = "123.456";
     double d = my_atof(str);
     printf("%f", d);
-
+    */
     /*
     int c[] = {3, 4, 2};
     int **s = initStructure(3, c);
@@ -91,4 +93,9 @@ int main()
     }
     free(s);
     */
+   int arr[] = {3,2,1};
+   qsort(arr, 3, sizeof(int), compare);
+    for(int i = 0; i < 3; i++){
+         printf("%d ", arr[i]);
+    }
 }
