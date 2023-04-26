@@ -16,7 +16,6 @@ typedef struct Node {
 } Node;
 
 
-
 void create_node(int data, Node **p_node) {
     *p_node = malloc(sizeof(Node));
     (*p_node)->data = data;
@@ -33,23 +32,25 @@ void add_neighbour(Node *node, Node *neighbour, double weight) {
     node->connections[node->num_cons - 1]->node = neighbour;
 }
 
-
 void add_to_visited(Node ***p_visited, int *p_n_visited, Node *node) { // CHANGED
     Node **visited = *p_visited; // ADDED
-
     for(int i = 0; i < *p_n_visited; i++) {
         if (visited[i] == node) {
-            return;
+            return; 
         }
     }
     (*p_n_visited)++; // CHECK THIS
     visited = realloc(visited, *p_n_visited * sizeof(Node *));
     visited[*p_n_visited - 1] = node;
-
     *p_visited = visited; // ADDED
 }
 
 int was_visited(Node **visited, int n_visited, Node *node) {
+    for(int i = 0; i < n_visited; i++) {
+        if (visited[i] == node) {
+            return 1;
+        }
+    }
     // Complete this function
     return 0;
 }
@@ -62,7 +63,6 @@ void dijkstra(Node *start, Node *end) {
     add_to_visited(&visited, &num_visited, current); // CHANGED
 
     
-
     while (current != end) {
         double min_dist = 1000000000.0;
         Node *min_node = (void *)0;
