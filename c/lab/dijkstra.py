@@ -40,8 +40,8 @@ if __name__ == '__main__':
     E = Node('E')
 
     # Create connections
-    A.connections = [Con(B, 1), Con(D, 2)]
-    B.connections = [Con(C, 2), Con(D, 3)]
+    A.connections = [Con(B, 1), Con(D, 3)]
+    B.connections = [Con(C, 2), Con(D, 1)]
     C.connections = []  # C has no outgoing connections
     D.connections = [Con(E, 4)]
     E.connections = []  # E has no outgoing connections
