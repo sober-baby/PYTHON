@@ -13,7 +13,6 @@ def opt_list(coins, target):
     OPT_soln[1] = [1]
     for i in range(2, target + 1):
         for j in range (len(coins)):
-            if coins[j] <= i:
                 if list[i] > list[i - coins[j]] + 1:
                     list[i] = list[i - coins[j]] + 1              
                     OPT_soln[i] = OPT_soln[i - coins[j]] + [coins[j]]
@@ -57,6 +56,6 @@ def make_change(denom, target, memo = {}, solns = {}):
     
 if __name__ == '__main__':
     coins = [1 ,4, 5]
-    #print(opt_list(coins, 11))
+    print(opt_list(coins, 11))
     print(make_change(coins, 11))
         
