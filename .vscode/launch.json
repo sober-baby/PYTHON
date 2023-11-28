@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/PYTHON",
-      "program": "c:/PYTHON/build/Debug/outDebug",
+      "cwd": "c:/Users/James/OneDrive/Documents/GitHub/PYTHON",
+      "program": "c:/Users/James/OneDrive/Documents/GitHub/PYTHON/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
